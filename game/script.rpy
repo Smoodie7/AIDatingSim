@@ -7,6 +7,7 @@ define e = Character("AI")
 label start:
 
     $ end_date = False
+    $ win_date = False
 
     show e happy
     scene bg room
@@ -21,8 +22,10 @@ label start:
             store.chat_result = response
 
             # Check for the end command
-            if "*End*" in response or "*end*" in response:
+            if "*end*" in response.lower():
                 end_date = True
+                if "*win*" in response.lower():
+                    win_date = True
 
             emotion = emotions(response)
             if emotion is not None:
