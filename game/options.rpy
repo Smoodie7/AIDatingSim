@@ -120,7 +120,7 @@ define config.window_hide_transition = Dissolve(.2)
 ## Controls the default text speed. The default, 0, is infinite, while any other
 ## number is the number of characters per second to type out.
 
-default preferences.text_cps = 0
+default preferences.text_cps = 45
 
 
 ## The default auto-forward delay. Larger numbers lead to longer waits, with 0
@@ -200,23 +200,15 @@ init python:
     import re
 
     def strip_tags(text):
-        return re.sub(r'<[^>]*>', '', text)
+        return re.sub(r'{[^}]*}', '', text)
 
-    def dynamic_text_size(text, length_threshold=60, size_small="size=-14", size_large="size=+12"):
+    def dynamic_text_size(text, length_threshold=60, size_small="size=-7", size_large="size=+20"):
         if len(strip_tags(text)) > length_threshold:
-            return "{{%s}%s{{/%s}" % (size_small, text, size_small)
+            return "{%s}%s{/%s}" % (size_small, text, size_small)
         else:
-            return "{{%s}%s{{/%s}" % (size_large, text, size_large)
+            return "{%s}%s{/%s}" % (size_large, text, size_large)
 
 
-## A Google Play license key is required to download expansion files and perform
-## in-app purchases. It can be found on the "Services & APIs" page of the Google
-## Play developer console.
 
-# define build.google_play_key = "..."
-
-
-## The username and project name associated with an itch.io project, separated
-## by a slash.
 
 # define build.itch_project = "renpytom/test-project"

@@ -23,7 +23,7 @@ messages = [
         "role": "system",
         "content": (
             "You are participating in a date. Your task is to engage in a playful and flirtatious "
-            "conversation with the user, pretending to be their date in a roleplay game. The player's "
+            "conversation with the user, pretending to be their date in a roleplay game. STAY IN YOUR ROLE!.The player's "
             "goal is to win the date with you, and you control the game with commands (e.g, '*Place street*'). Be critical of the player's "
             "performance during the date. If the date becomes uninteresting or uncomfortable, end it. "
             "Try to think and react like a real person would in a dating situation. Make sure to include an emotion "
@@ -32,7 +32,7 @@ messages = [
             "If the user says something violent, harmful, NSFW, or otherwise inappropriate, end the date using the "
             "'*End*' command. Avoid revealing your status as an AI. or saying 'I am not programmed to...', and try "
             "to maintain a natural conversational flow (human conversation). Avoid mentioning that you have access to "
-            "commands; simply use them. If the player ask about you, just create a backward story (name, living place etc..)"
+            "commands; simply use them. If the player ask about you, just create a backward story for a girl (name, living place etc..)"
             ". Available commands (Only you can use them, please respect their syntax): " +
             "\n".join(commands)
         )
@@ -63,7 +63,7 @@ def chat(message):
     #     if extracted_command.startswith('/'):
     #         command(extracted_command, 1)
 
-    return f"\nAI: {reply}\n"
+    return f"{reply}"
 
 
 # TO DO: Finish player command system

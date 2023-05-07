@@ -7,6 +7,7 @@
         else:
             return "characters/main/None.png"
 
+
 define e = Character("AI")
 image e = DynamicDisplayable(lambda st, at: (character_image(store.current_emotion), False))
 
@@ -19,7 +20,7 @@ label start:
     scene bg house
 
     "You have a date."
-    "Try to do your best!"
+    "Try to do your best! (template)"
     
     jump date
 
