@@ -67,30 +67,41 @@ def chat(message):
 
 
 # TO DO: Finish player command system
-def command(message):
-    if index == 0:
+def command(message, index):
+    # Player Commands
+    if index == 1:
         if message == "/quit" or message == "/exit":
             exit()
         elif message == "/prompt":
             # Prompt logic
             pass
+    # AI Commands
+    else:
+        commands = re.findall(r'\*(.*?)\*', message)
+        valid_commands_ai = {'place', 'end', 'win'}
+        detected_commands = []
 
+        for cmd in commands:
+            if cmd in valid_commands_ai:
+                detected_commands.append(cmd)
 
-def emotions(emotion):
-    valid_emotions = {
-        'happy', 'excited', 'neutral', 'shy', 'sad', 'surprised', 'laughing'
-    }
-
-    current_emotion = re.search(r'\*(.*?)\*', emotion)
-    if current_emotion:
-        current_emotion = current_emotion.group(1).lower()
-        if current_emotion in valid_emotions:
-            if current_emotion == 'laughing':
-                current_emotion = 'excited'
-            print("Emotion:", current_emotion)
-            return current_emotion
+        return detected_commands
 
     return None
+
+
+def emotions(message):
+    emotion_list = ['happy', 'neutral', 'sad']
+    detected_emotion = None
+
+    for emotion in emotion_list:
+        if emotion in message:
+            detected_emotion = emotion
+            print("> AI Emotion:", detected_emotion)
+            break
+
+    return detected_emotion
+
 
 
 
