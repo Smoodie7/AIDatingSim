@@ -202,7 +202,7 @@ init python:
     def strip_tags(text):
         return re.sub(r'<[^>]*>', '', text)
 
-    def dynamic_text_size(text, length_threshold=60, size_small="size=-14", size_large="size=+12"):
+    def dynamic_text_size(text, length_threshold=60, size_small="size=-4", size_large="size=+6"):
         if len(strip_tags(text)) > length_threshold:
             return "{{%s}%s{{/%s}" % (size_small, text, size_small)
         else:
