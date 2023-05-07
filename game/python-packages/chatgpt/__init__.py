@@ -11,7 +11,7 @@ commands = [
     "End: (end the date, use if the player makes you feel uncomfortable)",
     "Win: (the player won, if the player won the date with you, perfect date)",
     "Emotions: (used to express emotions e.g., '*Happy*', there are 6 emotions: 'Happy', 'Sad', 'Surprised',"
-    "'Angry', 'Excited', 'Neutral'; Use only these 5 emotions, include an emotion in most of your responses,"
+    "'Shy', 'Excited', 'Neutral'; Use only these 5 emotions, include an emotion in most of your responses,"
     "as this is the only command that can be used simultaneously with others!)",
     "Place <a place>: (used to change the place virtually, e.g., '*Place cafe*', use it to change the location you're"
     " at with the user to enhance immersion in the roleplay. Available places: 'street', 'cafe', 'supermarket'.)"
@@ -57,37 +57,41 @@ def chat(message):
 
     assistant_response = messages[-1]['content']
 
-    if assistant_response.count('*') == 2:
-        extracted_command = re.search(r'\*(.*?)\*', assistant_response)[1]
+    # if assistant_response.count('*') == 2:
+    #     extracted_command = re.search(r'\*(.*?)\*', assistant_response)[1]
 
-        if extracted_command.startswith('/'):
-            command(extracted_command, 1)
+    #     if extracted_command.startswith('/'):
+    #         command(extracted_command, 1)
 
     return f"\nAI: {reply}\n"
 
 
-def command(message, index):
+# TO DO: Finish player command system
+def command(message):
     if index == 0:
         if message == "/quit" or message == "/exit":
             exit()
         elif message == "/prompt":
             # Prompt logic
             pass
-    else:
-        if message == "/end":
-            input("Failed..")
-            exit()
 
 
 def emotions(emotion):
+    valid_emotions = {
+        'happy', 'excited', 'neutral', 'shy', 'sad', 'surprised', 'laughing'
+    }
+
     current_emotion = re.search(r'\*(.*?)\*', emotion)
     if current_emotion:
-        current_emotion = current_emotion.group(1)
-        valid_emotions = ['happy', 'excited', 'neutral', 'angry', 'sad', 'surprised']
-        if current_emotion.lower() in valid_emotions:
+        current_emotion = current_emotion.group(1).lower()
+        if current_emotion in valid_emotions:
+            if current_emotion == 'laughing':
+                current_emotion = 'excited'
             print("Emotion:", current_emotion)
-            return current_emotion.lower()
+            return current_emotion
+
     return None
+
 
 
 def completion(messages, api_key="", proxy=''):
