@@ -202,11 +202,24 @@ init python:
     def strip_tags(text):
         return re.sub(r'{[^}]*}', '', text)
 
-    def dynamic_text_size(text, length_threshold=60, size_small="size=-4", size_large="size=+6"):
+    def dynamic_text_size(text, length_threshold=60, size_small="size=+14", size_large="size=+18"):
         if len(strip_tags(text)) > length_threshold:
             return "{%s}%s{/%s}" % (size_small, text, size_small)
         else:
             return "{%s}%s{/%s}" % (size_large, text, size_large)
+    
+    
+    # Cleaning text from some commands
+    def removing_commands(text):
+        commands_to_delete = ("place", "end", "win")
+        commands = re.findall(r'\*(.*?)\*', text)
+        cleaned_text = text
+
+        for command in commands:
+            if command in commands_to_delete:
+                cleaned_text = re.sub(r'\*' + command + r'\*', cleaned_text)
+
+        return cleaned_text
 
 
 

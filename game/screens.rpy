@@ -139,10 +139,10 @@ style window:
     background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
 
 style namebox:
-    xpos gui.name_xpos
+    xpos 170
     xanchor gui.name_xalign
     xsize gui.namebox_width
-    ypos gui.name_ypos
+    ypos -60
     ysize gui.namebox_height
 
     background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
@@ -156,9 +156,9 @@ style say_label:
 style say_dialogue:
     properties gui.text_properties("dialogue")
 
-    xpos gui.dialogue_xpos
+    xpos 150
     xsize gui.dialogue_width
-    ypos gui.dialogue_ypos
+    ypos 40
 
     adjust_spacing False
 
@@ -244,6 +244,8 @@ screen quick_menu():
     if quick_menu:
 
         hbox:
+            yoffset -3
+            spacing 20
             style_prefix "quick"
 
             xalign 0.5
@@ -251,12 +253,8 @@ screen quick_menu():
 
             textbutton _("Back") action Rollback()
             textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
             textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+            textbutton _("Load") action QuickLoad()
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -268,12 +266,6 @@ default quick_menu = True
 
 style quick_button is default
 style quick_button_text is button_text
-
-style quick_button:
-    properties gui.button_properties("quick_button")
-
-style quick_button_text:
-    properties gui.button_text_properties("quick_button")
 
 
 ################################################################################
@@ -1509,8 +1501,10 @@ style slider_slider:
 # MY SCREENS
 screen loading_points():
     frame:
-        xpos 20
+        ypadding 20
+        xpadding 40
+        xalign 1.0
+        yalign 2.0
         ypos 20
-        text "...":
-            size 60
+        text "..."
     
