@@ -4,7 +4,7 @@ import re
 
 __version__ = "1.0.0"
 
-api_key = "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"
+api_key = "API_KEY_HERE"
 
 # Command list
 commands = [
